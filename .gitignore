@@ -1,6 +1,12 @@
 .venv/
 venv/
 .env
+.env.*
+!.env.example
+!*/.env.example
+node_modules/
+dist/
+dist-ssr/
 *.pyc
 __pycache__/
 .pytest_cache/

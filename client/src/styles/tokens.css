@@ -1,0 +1,69 @@
+/* ===== Design Tokens ===== */
+:root {
+  /* Colors - Light */
+  --color-bg: #f5f5f5;
+  --color-surface: #ffffff;
+  --color-surface-alt: #f0f0f0;
+  --color-border: #e0e0e0;
+  --color-text: #111111;
+  --color-text-secondary: #666666;
+  --color-accent: #1a1a1a;
+  --color-accent-fg: #ffffff;
+  --color-badge-wire: #2563eb;
+  --color-badge-primary: #16a34a;
+  --color-badge-opinion: #d97706;
+  --color-badge-state: #dc2626;
+  --color-badge-aggregator: #7c3aed;
+  --color-badge-unknown: #6b7280;
+  --color-verified: #16a34a;
+  --color-disputed: #dc2626;
+  --color-unverified: #d97706;
+
+  /* Radii */
+  --radius-card: 24px;
+  --radius-chip: 9999px;
+  --radius-panel: 20px;
+  --radius-btn: 12px;
+
+  /* Spacing */
+  --gutter: 16px;
+  --nav-height: 64px;
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+
+  /* Shadows */
+  --shadow-card: 0 2px 12px rgba(0,0,0,0.08);
+  --shadow-panel: 0 -4px 32px rgba(0,0,0,0.12);
+
+  /* Transitions */
+  --transition-base: 200ms ease;
+  --spring-easing: cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Dark mode tokens */
+.dark {
+  --color-bg: #0a0a0a;
+  --color-surface: #1a1a1a;
+  --color-surface-alt: #2a2a2a;
+  --color-border: #333333;
+  --color-text: #f5f5f5;
+  --color-text-secondary: #999999;
+  --color-accent: #f5f5f5;
+  --color-accent-fg: #111111;
+  --shadow-card: 0 2px 12px rgba(0,0,0,0.4);
+  --shadow-panel: 0 -4px 32px rgba(0,0,0,0.5);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not(.light) {
+    --color-bg: #0a0a0a;
+    --color-surface: #1a1a1a;
+    --color-surface-alt: #2a2a2a;
+    --color-border: #333333;
+    --color-text: #f5f5f5;
+    --color-text-secondary: #999999;
+    --color-accent: #f5f5f5;
+    --color-accent-fg: #111111;
+    --shadow-card: 0 2px 12px rgba(0,0,0,0.4);
+    --shadow-panel: 0 -4px 32px rgba(0,0,0,0.5);
+  }
+}
