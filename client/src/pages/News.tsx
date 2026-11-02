@@ -67,10 +67,20 @@ export const News: React.FC = () => {
   return (
     <main className="flex flex-col h-full" aria-label="News feed">
       {/* Header */}
-      <header className="px-4 pt-4 pb-2">
+      <header className="px-4 pt-4 pb-2 flex items-center justify-between">
         <h1 className="font-serif text-2xl text-[var(--color-text)]">
           News
         </h1>
+        <button
+          onClick={() => { setSelectedArticle(undefined); setAiOpen(true); }}
+          className="px-3 py-1.5 rounded-full bg-[var(--color-accent)] text-[var(--color-accent-fg)]
+                     text-xs font-mono font-medium flex items-center gap-1.5 shadow-sm
+                     hover:opacity-90 active:scale-95 transition-all"
+          aria-label="Open AI Research Assistant"
+        >
+          <span className="text-sm text-amber-300">✦</span>
+          <span>Ask AI</span>
+        </button>
       </header>
 
       <TabBar tabs={TABS} active={activeTab} onChange={setActiveTab} />
@@ -114,18 +124,23 @@ export const News: React.FC = () => {
         )}
       </div>
 
-      {/* Floating sparkle for tab context */}
-      <button
-        onClick={() => { setSelectedArticle(undefined); setAiOpen(true); }}
-        aria-label="Open AI research panel"
-        className="fixed bottom-20 right-4 w-12 h-12 rounded-full
-                   bg-[var(--color-accent)] text-[var(--color-accent-fg)] text-lg
-                   shadow-lg flex items-center justify-center touch-target z-20
-                   hover:scale-105 active:scale-95 transition-transform"
+      {/* Floating Ask AI Button pinned inside mobile container */}
+      <div
+        className="fixed left-1/2 -translate-x-1/2 w-full max-w-[430px] px-4 flex justify-end pointer-events-none z-20"
         style={{ bottom: 'calc(64px + var(--safe-bottom) + 16px)' }}
       >
-        ✦
-      </button>
+        <button
+          onClick={() => { setSelectedArticle(undefined); setAiOpen(true); }}
+          aria-label="Open AI research panel"
+          className="pointer-events-auto px-4 py-2.5 rounded-full
+                     bg-[var(--color-accent)] text-[var(--color-accent-fg)]
+                     shadow-2xl flex items-center gap-2 border border-white/20
+                     hover:scale-105 active:scale-95 transition-transform"
+        >
+          <span className="text-base text-amber-300">✦</span>
+          <span className="text-xs font-mono font-semibold uppercase tracking-wider">Ask AI</span>
+        </button>
+      </div>
 
       <AiPanel
         isOpen={aiOpen}

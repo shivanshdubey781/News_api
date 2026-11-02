@@ -66,16 +66,17 @@ export const ArticleCard: React.FC<ArticleCardProps> = ({ article, onSparkle }) 
         {/* Dark gradient overlay */}
         <div className="absolute inset-0 card-gradient" aria-hidden="true" />
 
-        {/* Sparkle button */}
+        {/* Sparkle / Ask AI button */}
         <button
           onClick={handleSparkle}
           aria-label={`Open AI panel for: ${article.title}`}
-          className="absolute top-3 right-3 w-10 h-10 rounded-full flex items-center justify-center
-                     bg-white/20 backdrop-blur-md border border-white/20 text-white
-                     hover:bg-white/30 active:scale-95 transition-all touch-target z-10"
-          style={{ minHeight: 40, minWidth: 40 }}
+          className="absolute top-3 right-3 px-3 py-1.5 rounded-full flex items-center gap-1.5
+                     bg-black/55 backdrop-blur-md border border-white/30 text-white text-xs font-mono font-medium
+                     hover:bg-black/75 active:scale-95 transition-all touch-target z-10 shadow-lg"
+          style={{ minHeight: 36 }}
         >
-          <span aria-hidden="true" className="text-base leading-none">✦</span>
+          <span aria-hidden="true" className="text-sm leading-none text-amber-300">✦</span>
+          <span>Ask AI</span>
         </button>
 
         {/* Text overlay */}

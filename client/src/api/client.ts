@@ -83,11 +83,13 @@ function getFilteredMockArticles(filters?: NewsFilters): Article[] {
     const t = filters.topic.toLowerCase();
     if (t === 'india') {
       list = list.filter((a) =>
-        ['ndtv', 'times of india', 'the hindu'].some((o) => a.outlet.toLowerCase().includes(o))
+        ['ndtv', 'times of india', 'the hindu', 'indian express', 'bloomberg'].some((o) =>
+          a.outlet.toLowerCase().includes(o)
+        )
       );
     } else if (t === 'world') {
       list = list.filter((a) =>
-        ['bbc', 'reuters', 'the guardian', 'al jazeera', 'afp', 'cnn', 'ap'].some((o) =>
+        ['bbc', 'reuters', 'the guardian', 'al jazeera', 'afp', 'cnn', 'ap', 'deutsche welle', 'financial times'].some((o) =>
           a.outlet.toLowerCase().includes(o)
         )
       );
