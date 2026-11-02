@@ -16,10 +16,12 @@ from typing import Optional
 from pydantic import Field, SecretStr, model_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
+_BASE_DIR = Path(__file__).resolve().parent.parent
+
 
 class Settings(BaseSettings):
     model_config = SettingsConfigDict(
-        env_file=".env",
+        env_file=(_BASE_DIR / ".env", ".env"),
         env_file_encoding="utf-8",
         case_sensitive=False,
         # Do NOT echo extra fields — keeps secrets safe
@@ -70,19 +72,20 @@ class Settings(BaseSettings):
 
 def _check_env_file_not_tracked() -> None:
     """Fail loudly at startup if .env would be committed to git."""
-    env_path = Path(".env")
-    if not env_path.exists():
+    env_paths = [_BASE_DIR / ".env", Path(".env")]
+    env_path = next((p for p in env_paths if p.exists()), None)
+    if not env_path:
         return
-    gitignore = Path(".gitignore")
-    if gitignore.exists():
-        patterns = gitignore.read_text(encoding="utf-8").splitlines()
-        if any(p.strip() == ".env" for p in patterns):
-            return  # .env is ignored — safe
+    for gi in [_BASE_DIR / ".gitignore", _BASE_DIR.parent / ".gitignore", Path(".gitignore")]:
+        if gi.exists():
+            patterns = gi.read_text(encoding="utf-8").splitlines()
+            if any(p.strip().startswith(".env") for p in patterns):
+                return  # .env is ignored — safe
     # Also check .git/info/exclude
-    git_exclude = Path(".git/info/exclude")
+    git_exclude = _BASE_DIR.parent / ".git" / "info" / "exclude"
     if git_exclude.exists():
         patterns = git_exclude.read_text(encoding="utf-8").splitlines()
-        if any(p.strip() == ".env" for p in patterns):
+        if any(p.strip().startswith(".env") for p in patterns):
             return
     raise RuntimeError(
         "SECURITY: '.env' file exists but is NOT listed in .gitignore. "
